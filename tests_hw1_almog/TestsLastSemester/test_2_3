@@ -1,0 +1,50 @@
+
+  xor %r8, %r8
+  movl $0, %ecx
+  movq $destination, %rdx
+  movb (%rdx,%rcx,1), %r8b
+  cmpl $0x68, %r8d
+  jne bad_173
+  incq %rcx
+  movq $destination, %rdx
+  movb (%rdx,%rcx,1), %r8b
+  cmpl $0x65, %r8d
+  jne bad_173
+  incq %rcx
+  movq $destination, %rdx
+  movb (%rdx,%rcx,1), %r8b
+  cmpl $0x6c, %r8d
+  jne bad_173
+  incq %rcx
+  movq $destination, %rdx
+  movb (%rdx,%rcx,1), %r8b
+  cmpl $0x6c, %r8d
+  jne bad_173
+  incq %rcx
+  movq $destination, %rdx
+  movb (%rdx,%rcx,1), %r8b
+  cmpl $0x6f, %r8d
+  jne bad_173
+  incq %rcx
+  movq $destination, %rdx
+  movb (%rdx,%rcx,1), %r8b
+  cmpl $0, %r8d
+  jne bad_173
+  incq %rcx
+  movq $destination, %rdx
+  movl (%rdx,%rcx,1), %r8d
+  cmpl $6, %r8d
+  jne bad_173
+  movq $60, %rax
+  movq $0, %rdi
+  syscall
+bad_173:
+  movq $60, %rax
+  movq $1, %rdi
+  syscall
+  
+  
+.section .data
+source:
+destination: .asciz "hello"
+num: .int 6

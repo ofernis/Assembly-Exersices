@@ -1,0 +1,50 @@
+
+  movl $0, %ecx
+  movq $destination, %rdx
+  movl (%rdx,%rcx,4), %r8d
+  cmpl $5, %r8d
+  jne bad_173
+  incq %rcx
+  movq $destination, %rdx
+  movl (%rdx,%rcx,4), %r8d
+  cmpl $8, %r8d
+  jne bad_173
+  incq %rcx
+  movq $destination, %rdx
+  movl (%rdx,%rcx,4), %r8d
+  cmpl $10, %r8d
+  jne bad_173
+  incq %rcx
+  movq $destination, %rdx
+  movl (%rdx,%rcx,4), %r8d
+  cmpl $25, %r8d
+  jne bad_173
+  incq %rcx
+  movq $destination, %rdx
+  movl (%rdx,%rcx,4), %r8d
+  cmpl $45, %r8d
+  jne bad_173
+  incq %rcx
+  movq $destination, %rdx
+  movl (%rdx,%rcx,4), %r8d
+  cmpl $100, %r8d
+  jne bad_173
+  incq %rcx
+  movq $destination, %rdx
+  movl (%rdx,%rcx,4), %r8d
+  cmpl $24, %r8d
+  jne bad_173
+  movq $60, %rax
+  movq $0, %rdi
+  syscall
+
+bad_173:
+  movq $60, %rax
+  movq $1, %rdi
+  syscall
+  
+  
+.section .data
+source: .int 5, 8, 10
+destination: .int 25, 45, 100, 0, 0, 0
+num: .int 24

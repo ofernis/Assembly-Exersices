@@ -1,0 +1,30 @@
+
+  xorl %ecx, %ecx
+  movq $source, %rbx
+  movq $destination, %rdx
+
+checkcorrectness:
+  movl (%rdx,%rcx,4), %r8d #destination+ecx->r8
+  cmpl %r8d, %ecx
+  jne bad_exit
+  incl %ecx
+  cmpl $8,%ecx
+  jne checkcorrectness
+  
+  movl (%rdx,%rcx,4), %r8d
+  cmpl $32, %r8d
+  jne bad_exit
+
+  movq $60, %rax
+  movq $0, %rdi
+  syscall
+
+bad_exit:
+  movq $60, %rax
+  movq $1, %rdi
+  syscall
+
+.section .data
+source: .int 0,1,2,3
+destination: .int 4,5,6,7,8,9,10,11 # expected: .int 0,1,2,3,4,5,6,7
+num: .int 32

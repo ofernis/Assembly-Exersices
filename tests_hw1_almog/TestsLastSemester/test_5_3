@@ -1,0 +1,47 @@
+
+cmpq $A11, head
+  jne bad
+  cmpq $5, A11
+  jne bad
+  cmpq $B1, A11+8
+  jne bad
+  cmpq $23, B1
+  jne bad
+  cmpq $A3, B1+8
+  jne bad
+  cmpq $0, A3
+  jne bad
+  cmpq $A22, A3+8
+  jne bad
+  cmpq $42, A22
+  jne bad
+  cmpq $B2, A22+8
+  jne bad
+  cmpq $4, B2
+  jne bad
+  cmpq $NULL, B2+8
+  jne bad
+  movq $60, %rax
+  movq $0, %rdi
+  syscall
+bad:
+  movq $60, %rax
+  movq $1, %rdi
+  syscall
+  
+  
+.section .data
+head: .quad A11
+src: .quad 42
+dst: .quad 23
+A11: .quad 5
+    .quad A22
+A22: .quad 42
+    .quad A3
+A3: .quad 0
+    .quad B1
+B1: .quad 23
+    .quad B2
+B2: .quad 4
+    .quad NULL
+.set NULL, 0
